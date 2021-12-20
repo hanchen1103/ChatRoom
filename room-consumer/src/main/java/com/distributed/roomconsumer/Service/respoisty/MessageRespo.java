@@ -1,6 +1,6 @@
 package com.distributed.roomconsumer.Service.respoisty;
 
-import com.distributed.roomconsumer.responsebody.chatProfileResponseBody;
+import com.distributed.roomconsumer.responsebody.ChatProfileResponseBody;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public interface MessageRespo {
      * @param toId to user id
      * @return list
      */
-    List<chatProfileResponseBody> getFromIdAndToIdProfile(Integer fromId, Integer toId,
+    List<ChatProfileResponseBody> getFromIdAndToIdProfile(Integer fromId, Integer toId,
                                                           Integer limit, Integer offset);
 
     /**
@@ -28,4 +28,5 @@ public interface MessageRespo {
     Integer sendMessage(String content, Integer type, Integer fromId, Integer toId, Integer isRead);
 
 
+    cha
 }

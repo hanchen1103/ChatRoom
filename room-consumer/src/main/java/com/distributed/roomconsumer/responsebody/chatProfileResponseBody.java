@@ -10,7 +10,7 @@ import java.util.List;
  * between contact person's chat profile
  */
 @Data
-public class chatProfileResponseBody implements Serializable {
+public class ChatProfileResponseBody implements Serializable {
 
     private static final long serialVersionUID = 5114247454630301420L;
 

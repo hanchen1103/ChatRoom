@@ -1,6 +1,8 @@
 package com.distributed.roomapi.model;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -31,6 +33,8 @@ public class Message implements Serializable {
     /**
      * createtime
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date createDate;
 
     /**

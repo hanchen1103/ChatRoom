@@ -9,7 +9,7 @@ import java.util.Date;
  * all contact list display
  */
 @Data
-public class chatContactPersonResponseBody implements Serializable {
+public class ChatContactPersonResponseBody implements Serializable {
 
     private static final long serialVersionUID = -7545697779091426073L;
 
