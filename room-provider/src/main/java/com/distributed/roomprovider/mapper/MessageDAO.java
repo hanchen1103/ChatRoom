@@ -25,7 +25,7 @@ public interface MessageDAO {
     Message selectById(@Param("Integer") Integer id);
 
     @Select({"select ", SELECT_NAME, " from ", TABLE_NAME,
-            " where fromId=#{fromId} and toId=#{toId} limit #{limit}, #{offset} order by id desc"})
-    List<Message> selectMessageListByFromIdAndtoId(@Param("fromId") Integer fromId, @Param("toId") Integer toId,
-                                                   @Param("limit") Integer limit, @Param("offset") Integer offset);
+            " where fromId=#{fromId} and toId=#{toId} order by id desc limit #{limit}, #{offset}"})
+    List<Message> selectMessageListByFromIdAndtoId(Integer fromId, Integer toId,
+                                                   Integer limit, Integer offset);
 }

@@ -5,6 +5,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.distributed.roomapi.model.Message;
 import com.distributed.roomapi.service.MessageResposity;
 import com.distributed.roomconsumer.Service.respoisty.MessageRespo;
+import com.distributed.roomconsumer.responsebody.ChatContactPersonResponseBody;
 import com.distributed.roomconsumer.responsebody.ChatProfileResponseBody;
 
 import java.util.Date;
@@ -18,7 +19,7 @@ public class MessageRespoImpl implements MessageRespo {
     MessageResposity messageResposity;
 
     @Override
-    public List<ChatProfileResponseBody> getFromIdAndToIdProfile(Integer fromId, Integer toId,
+    public ChatProfileResponseBody getFromIdAnd2IdProfile(Integer fromId, Integer toId,
                                                                  Integer limit, Integer offset) {
         if(fromId == null || toId == null || limit == null || offset == null) {
              throw new NullPointerException("param exception");
@@ -27,7 +28,11 @@ public class MessageRespoImpl implements MessageRespo {
             throw new IllegalArgumentException("limit and offset exception");
         }
         List<Message> list = messageResposity.selectByFromIdAndToId(fromId, toId, limit, offset);
-        return null;
+        ChatProfileResponseBody chatProfileResponseBody = new ChatProfileResponseBody();
+        chatProfileResponseBody.setMessageList(list);
+        chatProfileResponseBody.setFromUserId(fromId);
+        chatProfileResponseBody.setToUserId(toId);
+        return chatProfileResponseBody;
     }
 
     @Override
@@ -45,5 +50,10 @@ public class MessageRespoImpl implements MessageRespo {
         message.setStatus(1);
         message.setIsRead(isRead);
         return messageResposity.addMessage(message);
+    }
+
+    @Override
+    public List<ChatContactPersonResponseBody> selectContactByFromIdAnd2Id(Integer userId) {
+        return null;
     }
 }
