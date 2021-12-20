@@ -20,7 +20,7 @@ public class MessageController {
     @Resource
     MessageRespo messageRespo;
 
-    @PostMapping(value = "/", produces = "application/json;charset=UTF-8")
+    @PostMapping(value = "", produces = "application/json;charset=UTF-8")
     public String sendMsg(HttpServletRequest httpServletRequest) {
         try {
             String content = httpServletRequest.getParameter("content");
