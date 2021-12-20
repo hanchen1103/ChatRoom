@@ -17,7 +17,7 @@ public interface MessageDAO {
     String SELECT_NAME = " id, " + INSERT_NAME;
 
     @Insert({"insert into ", TABLE_NAME, " ( ", INSERT_NAME,
-            " ) values (content=#{content},type=#{type},createDate=#{createDate},fromId=#{fromId},toId=#{toId},isRead=#{isRead})"})
+            " ) values (#{content},#{type},#{createDate},#{fromId},#{toId},#{isRead})"})
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     Integer addMessage(Message message);
 
