@@ -5,6 +5,7 @@ import com.distributed.roomconsumer.Service.respoisty.UserRespo;
 
 public abstract class UserLoginAbstractService implements UserRespo {
 
+
     @Override
     public User login(String account, String password) {
         return null;
@@ -14,5 +15,6 @@ public abstract class UserLoginAbstractService implements UserRespo {
     public User register(String account, String password) {
         return null;
     }
+
 
 }

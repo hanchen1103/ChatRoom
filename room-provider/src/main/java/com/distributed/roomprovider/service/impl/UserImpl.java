@@ -37,4 +37,13 @@ public class UserImpl implements UserResposity {
         }
         userDAO.updatePassword(password, userId);
     }
+
+    @Override
+    public Integer addUser(User user) {
+        if(user == null) {
+            throw new NullPointerException();
+        }
+        userDAO.addUser(user);
+        return user.getId();
+    }
 }

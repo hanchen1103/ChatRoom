@@ -1,4 +1,4 @@
-package com.distributed.roomconsumer.Service.impl;
+package com.distributed.roomconsumer.Service.impl.MessageImpl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @org.springframework.stereotype.Service
-public class MessageRespoImpl implements MessageRespo {
+public class MessageResponseServiceImpl implements MessageRespo {
 
     @Reference
     MessageResposity messageResposity;

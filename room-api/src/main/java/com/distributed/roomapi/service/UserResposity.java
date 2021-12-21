@@ -27,4 +27,10 @@ public interface UserResposity {
      * @param userId user id
      */
     void updateUserPassword(String password, Integer userId);
+
+    /**
+     * add user
+     * @return new user id
+     */
+    Integer addUser(User user);
 }

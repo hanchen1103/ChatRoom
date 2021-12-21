@@ -37,5 +37,5 @@ public class User implements Serializable {
      * 1: abnormal
      * 2: ban
      */
-    private String status;
+    private Integer status;
 }
