@@ -3,8 +3,10 @@ package com.distributed.roomconsumer.Service.impl.userImpl;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.distributed.roomapi.model.User;
+import com.distributed.roomapi.service.SessionService;
 import com.distributed.roomapi.service.UserResposity;
 import com.distributed.roomconsumer.Service.respoisty.UserRespo;
+import com.distributed.roomconsumer.responsebody.LoginSessionResponseBody;
 import com.distributed.roomconsumer.util.newProjectUtil;
 
 import java.util.Objects;
@@ -17,9 +19,12 @@ public class UserLoginByAccoountServiceImpl implements UserRespo {
     @Reference
     UserResposity userResposity;
 
+    @Reference
+    SessionService sessionService;
+
     @Override
-    public User login(String account, String password) {
-        if(account == null || account.isEmpty() || password == null || password.isEmpty()) {
+    public LoginSessionResponseBody login(String account, String password, Long expireTime) {
+        if(account == null || account.isEmpty() || password == null || password.isEmpty() || expireTime == null) {
             throw new NullPointerException();
         }
         User user = userResposity.selectUserByAccount(account);
@@ -29,12 +34,16 @@ public class UserLoginByAccoountServiceImpl implements UserRespo {
         if(!Objects.equals(newProjectUtil.MD5(password + user.getSalt()), user.getPassword())) {
             throw new IllegalArgumentException("password is wrong");
         }
-        return user;
+        String res = sessionService.addSession2Redis(user.getId(), expireTime);
+        LoginSessionResponseBody loginSessionResponseBody = new LoginSessionResponseBody();
+        loginSessionResponseBody.setUser(user);
+        loginSessionResponseBody.setToken(res);
+        return loginSessionResponseBody;
     }
 
     @Override
-    public User register(String account, String password) {
-        if(account == null || account.isEmpty() || password == null || password.isEmpty()) {
+    public LoginSessionResponseBody register(String account, String password, Long expireTime) {
+        if(account == null || account.isEmpty() || password == null || password.isEmpty() || expireTime == null) {
             throw new NullPointerException();
         }
         User user = new User();
@@ -47,6 +56,11 @@ public class UserLoginByAccoountServiceImpl implements UserRespo {
         user.setPassword(newProjectUtil.MD5(password + salt));
         user.setStatus(0);
         userResposity.addUser(user);
-        return user;
+        sessionService.addSession2Redis(user.getId(), expireTime);
+        String res = sessionService.addSession2Redis(user.getId(), expireTime);
+        LoginSessionResponseBody loginSessionResponseBody = new LoginSessionResponseBody();
+        loginSessionResponseBody.setUser(user);
+        loginSessionResponseBody.setToken(res);
+        return loginSessionResponseBody;
     }
 }

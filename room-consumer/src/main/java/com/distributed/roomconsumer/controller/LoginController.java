@@ -1,17 +1,17 @@
 package com.distributed.roomconsumer.controller;
 
-import com.distributed.roomapi.model.User;
 import com.distributed.roomconsumer.Service.impl.userImpl.UserLoginByAccoountServiceImpl;
-import com.distributed.roomconsumer.Service.respoisty.UserRespo;
+import com.distributed.roomconsumer.responsebody.LoginSessionResponseBody;
 import com.distributed.roomconsumer.util.jsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 
 @RestController
 public class LoginController {
@@ -22,12 +22,14 @@ public class LoginController {
     UserLoginByAccoountServiceImpl userRespo;
 
     @PostMapping(value = "/login", produces = {"application/json;charset=UTF-8"})
-    public String Login(@RequestBody Map<String, String> map) {
+    public String Login(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
-            String account = map.get("account");
-            String password = map.get("password");
-            User user = userRespo.login(account, password);
-            return jsonUtil.getJSONString(200, user);
+            String account = httpServletRequest.getParameter("account");
+            String password = httpServletRequest.getParameter("password");
+            Long expireTime = Long.parseLong(httpServletRequest.getParameter("expireTime"));
+            LoginSessionResponseBody res = userRespo.login(account, password, expireTime);
+            httpServletRequest.getSession().setAttribute("USERKEY", res.getToken());
+            return jsonUtil.getJSONString(200, res);
         } catch (NullPointerException | IllegalArgumentException e) {
             logger.error(e.getMessage());
             return jsonUtil.getJSONString(500, e.getMessage());
@@ -35,12 +37,14 @@ public class LoginController {
     }
 
     @PostMapping(value = "/register", produces = {"application/json;charset=UTF-8"})
-    public String register(@RequestBody Map<String, String> map) {
+    public String register(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
-            String account = map.get("account");
-            String password = map.get("password");
-            User user = ((UserLoginByAccoountServiceImpl) userRespo).register(account, password);
-            return jsonUtil.getJSONString(200, user);
+            String account = httpServletRequest.getParameter("account");
+            String password = httpServletRequest.getParameter("password");
+            Long expireTime = Long.parseLong(httpServletRequest.getParameter("expireTime"));
+            LoginSessionResponseBody res = ((UserLoginByAccoountServiceImpl) userRespo).register(account, password, expireTime);
+            httpServletRequest.getSession().setAttribute("USERKEY", res.getToken());
+            return jsonUtil.getJSONString(200, res);
         } catch (NullPointerException | IllegalArgumentException e) {
             logger.error(e.getMessage());
             return jsonUtil.getJSONString(500, e.getMessage());

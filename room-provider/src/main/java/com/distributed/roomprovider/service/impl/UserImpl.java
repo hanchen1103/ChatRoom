@@ -1,6 +1,5 @@
 package com.distributed.roomprovider.service.impl;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.distributed.roomapi.model.User;
 import com.distributed.roomapi.service.UserResposity;
 import com.distributed.roomprovider.mapper.UserDAO;

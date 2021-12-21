@@ -5,9 +5,9 @@ public interface SessionService {
     /**
      * distributed system session should be saved in the third-party components(resdis)
      * @param userId user id
-     * @return 1 or 0
+     * @return sessionId
      */
-    Integer addSession2Redis(Integer userId, Long timeValue);
+    String addSession2Redis(Integer userId, Long timeValue);
 
     /**
      * delete session from redis
@@ -19,4 +19,12 @@ public interface SessionService {
      * @return Long
      */
     Long currentSessionSavedNum();
+
+    /**
+     * verify key in redis
+     * @param userId param + userid
+     * @return string
+     */
+    String getSessionValue(String userId);
+
 }

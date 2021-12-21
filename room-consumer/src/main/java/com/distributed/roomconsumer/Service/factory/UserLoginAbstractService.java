@@ -2,18 +2,19 @@ package com.distributed.roomconsumer.Service.factory;
 
 import com.distributed.roomapi.model.User;
 import com.distributed.roomconsumer.Service.respoisty.UserRespo;
+import com.distributed.roomconsumer.responsebody.LoginSessionResponseBody;
 
 
 public abstract class UserLoginAbstractService implements UserRespo {
 
 
     @Override
-    public User login(String account, String password) {
+    public LoginSessionResponseBody login(String account, String password, Long expireTime) {
         return null;
     }
 
     @Override
-    public User register(String account, String password) {
+    public LoginSessionResponseBody register(String account, String password, Long expireTime) {
         return null;
     }
 

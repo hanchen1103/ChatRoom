@@ -1,11 +1,12 @@
 package com.distributed.roomconsumer.Service.respoisty;
 
 import com.distributed.roomapi.model.User;
+import com.distributed.roomconsumer.responsebody.LoginSessionResponseBody;
 
 public interface UserRespo {
 
-    User login(String account, String password);
+    LoginSessionResponseBody login(String account, String password, Long expireTime);
 
-    User register(String account, String password);
+    LoginSessionResponseBody register(String account, String password, Long expireTime);
 
 }
