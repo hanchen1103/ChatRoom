@@ -23,7 +23,7 @@ public class SessionService implements com.distributed.roomapi.service.SessionSe
             throw new NullPointerException("param null");
         }
         String value = UUID.randomUUID().toString().substring(16);
-        jedisAdapterForSession.setpx(EXPIRE_TIME_PARAM + userId, value, timeValue);
+        jedisAdapterForSession.setex(EXPIRE_TIME_PARAM + userId, value, timeValue);
         return value;
     }
 

@@ -11,14 +11,11 @@ import java.util.List;
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
 
-    @Autowired
-    SessionInterceptor sessionInterceptor;
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         List<String> patterns = new ArrayList<>();
         patterns.add("/login");
         patterns.add("/register");
-        registry.addInterceptor(sessionInterceptor).addPathPatterns("/**").excludePathPatterns(patterns);
+        registry.addInterceptor(new SessionInterceptor()).addPathPatterns("/").excludePathPatterns(patterns);
     }
 }

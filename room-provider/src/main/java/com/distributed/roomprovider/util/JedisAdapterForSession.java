@@ -28,7 +28,7 @@ public class JedisAdapterForSession implements InitializingBean {
         return null;
     }
 
-    public String setpx(String key, String value, Long timeValue) {
+    public String setex(String key, String value, Long timeValue) {
         try (Jedis jedis = jedisPool.getResource()) {
             return jedis.setex(key, timeValue, value);
         } catch (Exception e) {

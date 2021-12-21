@@ -19,4 +19,9 @@ public class UserLoginByPhoneServiceImpl implements UserRespo {
     public LoginSessionResponseBody register(String account, String password, Long expireTime) {
         return null;
     }
+
+    @Override
+    public void logout(String userId) {
+
+    }
 }

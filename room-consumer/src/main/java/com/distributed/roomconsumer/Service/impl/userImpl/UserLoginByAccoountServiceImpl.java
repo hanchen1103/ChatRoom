@@ -63,4 +63,9 @@ public class UserLoginByAccoountServiceImpl implements UserRespo {
         loginSessionResponseBody.setToken(res);
         return loginSessionResponseBody;
     }
+
+    @Override
+    public void logout(String userId) {
+
+    }
 }

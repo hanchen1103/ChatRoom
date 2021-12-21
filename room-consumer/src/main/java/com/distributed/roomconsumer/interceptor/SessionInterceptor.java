@@ -8,7 +8,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Configuration
+
 public class SessionInterceptor implements HandlerInterceptor {
 
     @Reference

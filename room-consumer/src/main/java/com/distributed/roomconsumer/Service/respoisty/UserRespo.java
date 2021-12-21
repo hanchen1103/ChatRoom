@@ -1,6 +1,5 @@
 package com.distributed.roomconsumer.Service.respoisty;
 
-import com.distributed.roomapi.model.User;
 import com.distributed.roomconsumer.responsebody.LoginSessionResponseBody;
 
 public interface UserRespo {
@@ -9,4 +8,5 @@ public interface UserRespo {
 
     LoginSessionResponseBody register(String account, String password, Long expireTime);
 
+    void logout(String userId);
 }
