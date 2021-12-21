@@ -38,6 +38,9 @@ public class UserLoginByAccoountServiceImpl implements UserRespo {
             throw new NullPointerException();
         }
         User user = new User();
+        if(userResposity.selectUserByAccount(account) != null) {
+            throw new IllegalArgumentException("user account is exist");
+        }
         String salt = UUID.randomUUID().toString().substring(0, 6);
         user.setSalt(salt);
         user.setAccount(account);
