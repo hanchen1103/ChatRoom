@@ -4,7 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.distributed.roomapi.model.User;
 import com.distributed.roomapi.service.UserResposity;
-import com.distributed.roomconsumer.Service.factory.UserLoginAbstractService;
+import com.distributed.roomconsumer.Service.respoisty.UserRespo;
 import com.distributed.roomconsumer.util.newProjectUtil;
 
 import java.util.Objects;
@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Service
 @org.springframework.stereotype.Service
-public class UserLoginByAccoountServiceImpl extends UserLoginAbstractService {
+public class UserLoginByAccoountServiceImpl implements UserRespo {
 
     @Reference
     UserResposity userResposity;

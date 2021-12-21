@@ -19,14 +19,14 @@ public class LoginController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Resource
-    UserRespo userRespo;
+    UserLoginByAccoountServiceImpl userRespo;
 
     @PostMapping(value = "/login", produces = {"application/json;charset=UTF-8"})
     public String Login(@RequestBody Map<String, String> map) {
         try {
             String account = map.get("account");
             String password = map.get("password");
-            User user = ((UserLoginByAccoountServiceImpl) userRespo).login(account, password);
+            User user = userRespo.login(account, password);
             return jsonUtil.getJSONString(200, user);
         } catch (NullPointerException | IllegalArgumentException e) {
             logger.error(e.getMessage());
