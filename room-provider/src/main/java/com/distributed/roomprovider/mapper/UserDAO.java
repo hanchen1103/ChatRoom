@@ -23,7 +23,7 @@ public interface UserDAO {
     User selectByUserAccount(@Param("account") String account);
 
     @Insert({"insert into ", TABLE_NAME,
-            " ( ", INSERT_NAME, " ) values (#{account}, #{password}, #{head_url}, #{salt}, #{status})"})
+            " ( ", INSERT_NAME, " ) values (#{account}, #{password}, #{salt}, #{status})"})
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     Integer addUser(User user);
 
