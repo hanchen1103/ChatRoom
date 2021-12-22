@@ -7,7 +7,7 @@ public interface SessionService {
      * @param userId user id
      * @return sessionId
      */
-    String addSession2Redis(Integer userId);
+    String addSession2Redis(Integer userId, Long timeValue);
 
     /**
      * delete session from redis
