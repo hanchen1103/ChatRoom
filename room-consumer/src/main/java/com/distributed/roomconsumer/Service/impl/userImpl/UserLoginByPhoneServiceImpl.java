@@ -21,7 +21,7 @@ public class UserLoginByPhoneServiceImpl implements UserRespo {
     }
 
     @Override
-    public void logout(String userId) {
+    public void logout(Integer userId) {
 
     }
 }

@@ -1,4 +1,4 @@
-package com.distributed.roomconsumer.config;
+package com.distributed.roomconsumer.interceptor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

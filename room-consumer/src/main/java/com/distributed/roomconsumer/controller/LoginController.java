@@ -5,7 +5,9 @@ import com.distributed.roomconsumer.responsebody.LoginSessionResponseBody;
 import com.distributed.roomconsumer.util.jsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @RestController
+@RequestMapping("/user")
 public class LoginController {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
@@ -45,6 +48,18 @@ public class LoginController {
             LoginSessionResponseBody res = ((UserLoginByAccoountServiceImpl) userRespo).register(account, password, expireTime);
             httpServletRequest.getSession().setAttribute("USERKEY", res.getToken());
             return jsonUtil.getJSONString(200, res);
+        } catch (NullPointerException | IllegalArgumentException e) {
+            logger.error(e.getMessage());
+            return jsonUtil.getJSONString(500, e.getMessage());
+        }
+    }
+
+    @DeleteMapping(value = "/logout", produces = {"application/json;charset=UTF-8"})
+    public String logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        try {
+            Integer userId = Integer.parseInt(httpServletRequest.getParameter("userId"));
+            ((UserLoginByAccoountServiceImpl) userRespo).logout(userId);
+            return jsonUtil.getJSONString(200);
         } catch (NullPointerException | IllegalArgumentException e) {
             logger.error(e.getMessage());
             return jsonUtil.getJSONString(500, e.getMessage());

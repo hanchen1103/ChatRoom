@@ -1,6 +1,5 @@
 package com.distributed.roomconsumer.controller;
 
-import com.distributed.roomapi.service.MessageResposity;
 import com.distributed.roomconsumer.Service.respoisty.MessageRespo;
 import com.distributed.roomconsumer.util.jsonUtil;
 import org.slf4j.Logger;

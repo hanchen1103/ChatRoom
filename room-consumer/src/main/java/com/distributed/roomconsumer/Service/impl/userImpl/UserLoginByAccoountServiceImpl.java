@@ -65,7 +65,7 @@ public class UserLoginByAccoountServiceImpl implements UserRespo {
     }
 
     @Override
-    public void logout(String userId) {
-
+    public void logout(Integer userId) {
+        sessionService.deleteSessionFromRedis(userId);
     }
 }

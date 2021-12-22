@@ -1,4 +1,4 @@
-package com.distributed.roomconsumer.config;
+package com.distributed.roomconsumer.config.cors;
 
 import org.springframework.stereotype.Component;
 

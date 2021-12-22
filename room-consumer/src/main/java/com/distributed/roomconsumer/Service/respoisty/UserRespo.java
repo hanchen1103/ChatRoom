@@ -8,5 +8,5 @@ public interface UserRespo {
 
     LoginSessionResponseBody register(String account, String password, Long expireTime);
 
-    void logout(String userId);
+    void logout(Integer userId);
 }
