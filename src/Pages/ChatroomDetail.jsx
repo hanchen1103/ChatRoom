@@ -10,6 +10,7 @@ const ChatroomDetail = () => {
   const dispatch = useDispatch();
   const fromId = sessionStorage.getItem("userId");
   const [input, setInput] = useState("");
+
   //const [msgList, setMsgList] = useState([]);
   //const [initial, setInitia] = useState(true);
 
@@ -19,13 +20,16 @@ const ChatroomDetail = () => {
   });
 
   const postData = useCallback(() => {
-    let tempData = {
-      toId: 2,
-      fromId: fromId,
-      content: input,
-    };
-    //dispatch(SendMessage(JSON.stringify(tempData)))
-  }, []);
+    if (input.length > 0) {
+      let tempData = {
+        toId: 17,
+        fromId: fromId,
+        content: input,
+      };
+      dispatch(SendMessage(tempData));
+    }
+    setInput("");
+  }, [input]);
 
   return (
     <div className="ChatroomDetailContainer">
@@ -96,6 +100,7 @@ const ChatroomDetail = () => {
       </div>
       <div className="ChatroomDetailFooter">
         <FontAwesomeIcon
+          className="ChatRoomDetailFooterIcon"
           style={{
             width: "2rem",
             height: "2rem",
@@ -107,6 +112,7 @@ const ChatroomDetail = () => {
         <input
           onChange={(value) => setInput(value.target.value)}
           placeholder="Input Something"
+          value={input}
           className="chatroomDetailFooterInput"
         />
         <button onClick={() => postData()} className="ChatroomDetailFooterBtn">

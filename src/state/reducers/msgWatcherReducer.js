@@ -16,9 +16,5 @@ const accountReducer = createSlice({
   },
 });
 
-// export async function login(state={},action) {
-  
-// }
-
-export const { login,register, logout } = accountReducer.actions;
+export const { login, register, logout } = accountReducer.actions;
 export default accountReducer.reducer;

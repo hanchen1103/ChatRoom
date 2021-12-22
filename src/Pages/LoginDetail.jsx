@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import imgLog from "../Assets/pictures/pexels-steve-johnson-1145720.jpg";
 import { useSelector, useDispatch, batch } from "react-redux";
 import { login } from "../state/reducers/accountReducer";
@@ -18,6 +18,10 @@ const LoginDetail = () => {
   const [conPwd, setConPwd] = useState("");
   const [tip, setTips] = useState(false);
 
+  useEffect(() => {
+    if (loginWea) navigate("../../");
+  }, [loginWea]);
+
   const pwdCheck = (e) => {
     setConPwd(e.target.value);
     if (e.target.value !== pwd) setTips(true);
@@ -25,48 +29,39 @@ const LoginDetail = () => {
   };
 
   const goLogin = async () => {
-    try {
-      let url = "";
-      if (loginstatus)
-        url = "http://42.192.54.187:8080/newproject-0.0.1-SNAPSHOT/login";
-      else url = "http://42.192.54.187:8080/newproject-0.0.1-SNAPSHOT/register";
-      let data = {
-        account: username,
-        password: pwd,
-      };
-      await fetch(url, {
-        mode: "cors",
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(data),
+    let url = "";
+    if (loginstatus)
+      url = "http://42.192.54.187:8080/newproject-0.0.1-SNAPSHOT/login";
+    else url = "http://42.192.54.187:8080/newproject-0.0.1-SNAPSHOT/register";
+    let data = {
+      account: username,
+      password: pwd,
+    };
+    await fetch(url, {
+      mode: "cors",
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        return res.json();
       })
-        .then((res) => {
-          return res.json();
-        })
-        .then((json) => {
-          console.log(json);
-          if (json.code === 200) {
-            batch(() => {
-              dispatch(login());
-              dispatch(addUserRecord(json.user));
-            });
-            sessionStorage.setItem("userId", json.user.id);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } finally {
-      if (loginWea) {
-        navigate("../../");
-      }
-      console.log("redux: ", loginWea);
-      console.log("userInfo", userInfo);
-    }
+      .then((json) => {
+        if (json.code === 200) {
+          batch(() => {
+            dispatch(login());
+            dispatch(addUserRecord(json.user));
+          });
+          sessionStorage.setItem("userId", json.user.id);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
-  
+
   return (
     <div className="loginPage">
       <Background fixed={true} imgIndex={3} />

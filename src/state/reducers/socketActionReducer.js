@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-const initialValue = [{}];
+const initialValue = [];
 const socketActionReducer = createSlice({
   name: "socket",
   initialState: { value: initialValue },

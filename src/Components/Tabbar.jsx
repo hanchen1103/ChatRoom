@@ -12,7 +12,6 @@ import { useNavigate } from "react-router";
 import Logo from "../Assets/pictures/log.png";
 
 const Tabbar = () => {
-  sessionStorage.setItem("menuHide", false);
   let iconList = [
     {
       id: 0,
@@ -33,11 +32,12 @@ const Tabbar = () => {
     },
   ];
   const navigate = useNavigate();
-  const [menuHide, setMenuHide] = useState(false);
+  const menuHide = false;
   const [update, setUpdate] = useState(true);
-  const [lsit, setlist] = useState(iconList);
+  const [list, setlist] = useState(iconList);
   const [index, setIndex] = useState(0);
   const [hisIndex, setHisIndex] = useState(0);
+
   useEffect(() => {
     if (index === 0) navigate("1");
     else if (index === 1) navigate("2");
@@ -45,6 +45,7 @@ const Tabbar = () => {
     else if (index === 3) navigate("4");
     else if (index === 4) navigate("5");
   }, [index, navigate]);
+
   useEffect(() => {
     iconList.map((item) => {
       item.choosed = false;
@@ -53,6 +54,7 @@ const Tabbar = () => {
     iconList[index].choosed = true;
     setlist(iconList);
   }, [update]);
+
   const tabbarItemChoosed = (e) => {
     console.log("start", e, index, hisIndex);
     if (index === e) {
@@ -95,7 +97,11 @@ const Tabbar = () => {
           }}
           icon={faBars}
         /> */}
-        <img style={{width:'5rem',height:'5rem',objectFit:'cover'}} src={Logo} alt="LOGO" />
+        <img
+          style={{ width: "5rem", height: "5rem", objectFit: "cover" }}
+          src={Logo}
+          alt="LOGO"
+        />
       </div>
       <div
         className={"tabbarItems"}
@@ -103,7 +109,7 @@ const Tabbar = () => {
           height: menuHide ? 0 : "50vh",
         }}
       >
-        {lsit.map((item, index) => {
+        {list.map((item, index) => {
           return (
             <div
               key={item.id}
