@@ -18,12 +18,12 @@ public class SessionService implements com.distributed.roomapi.service.SessionSe
 
 
     @Override
-    public String addSession2Redis(Integer userId, Long timeValue) {
-        if(userId == null || timeValue == null) {
+    public String addSession2Redis(Integer userId) {
+        if(userId == null ) {
             throw new NullPointerException("param null");
         }
         String value = UUID.randomUUID().toString().substring(16);
-        jedisAdapterForSession.setex(EXPIRE_TIME_PARAM + userId, value, timeValue);
+        jedisAdapterForSession.set(EXPIRE_TIME_PARAM + userId, value);
         return value;
     }
 
@@ -47,5 +47,14 @@ public class SessionService implements com.distributed.roomapi.service.SessionSe
         }
         String sessionKey = EXPIRE_TIME_PARAM + userId;
         return jedisAdapterForSession.get(sessionKey);
+    }
+
+    @Override
+    public Long expireSession(String userId, Long timeValue) {
+        if(userId == null) {
+            throw new NullPointerException("param null");
+        }
+        String sessionKey = EXPIRE_TIME_PARAM + userId;
+        return jedisAdapterForSession.expire(sessionKey, timeValue);
     }
 }

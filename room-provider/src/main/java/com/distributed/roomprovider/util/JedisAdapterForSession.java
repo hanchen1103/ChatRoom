@@ -19,9 +19,9 @@ public class JedisAdapterForSession implements InitializingBean {
         jedisPool = new JedisPool("redis://127.0.0.1:6379/5");
     }
 
-    public Long setnx(String key, String value) {
+    public String set(String key, String value) {
         try (Jedis jedis = jedisPool.getResource()) {
-            return jedis.setnx(key, value);
+            return jedis.set(key, value);
         } catch (Exception e) {
             logger.error("redis error " + e.getMessage());
         }
@@ -31,6 +31,15 @@ public class JedisAdapterForSession implements InitializingBean {
     public String setex(String key, String value, Long timeValue) {
         try (Jedis jedis = jedisPool.getResource()) {
             return jedis.setex(key, timeValue, value);
+        } catch (Exception e) {
+            logger.error("redis error " + e.getMessage());
+        }
+        return null;
+    }
+
+    public Long expire(String key, Long timeValue) {
+        try (Jedis jedis = jedisPool.getResource()) {
+            return jedis.expire(key, timeValue);
         } catch (Exception e) {
             logger.error("redis error " + e.getMessage());
         }

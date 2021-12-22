@@ -34,7 +34,7 @@ public class UserLoginByAccoountServiceImpl implements UserRespo {
         if(!Objects.equals(newProjectUtil.MD5(password + user.getSalt()), user.getPassword())) {
             throw new IllegalArgumentException("password is wrong");
         }
-        String res = sessionService.addSession2Redis(user.getId(), expireTime);
+        String res = sessionService.addSession2Redis(user.getId());
         LoginSessionResponseBody loginSessionResponseBody = new LoginSessionResponseBody();
         loginSessionResponseBody.setUser(user);
         loginSessionResponseBody.setToken(res);
@@ -56,8 +56,7 @@ public class UserLoginByAccoountServiceImpl implements UserRespo {
         user.setPassword(newProjectUtil.MD5(password + salt));
         user.setStatus(0);
         userResposity.addUser(user);
-        sessionService.addSession2Redis(user.getId(), expireTime);
-        String res = sessionService.addSession2Redis(user.getId(), expireTime);
+        String res = sessionService.addSession2Redis(user.getId());
         LoginSessionResponseBody loginSessionResponseBody = new LoginSessionResponseBody();
         loginSessionResponseBody.setUser(user);
         loginSessionResponseBody.setToken(res);

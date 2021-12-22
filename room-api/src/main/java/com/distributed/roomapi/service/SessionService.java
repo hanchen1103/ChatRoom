@@ -7,7 +7,7 @@ public interface SessionService {
      * @param userId user id
      * @return sessionId
      */
-    String addSession2Redis(Integer userId, Long timeValue);
+    String addSession2Redis(Integer userId);
 
     /**
      * delete session from redis
@@ -26,5 +26,11 @@ public interface SessionService {
      * @return string
      */
     String getSessionValue(String userId);
+
+    /**
+     * update session time
+     * @return ttl
+     */
+    Long expireSession(String userId, Long timeValue);
 
 }

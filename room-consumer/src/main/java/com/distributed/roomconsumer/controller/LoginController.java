@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @RestController
@@ -27,11 +28,12 @@ public class LoginController {
     @PostMapping(value = "/login", produces = {"application/json;charset=UTF-8"})
     public String Login(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
+            HttpSession session = httpServletRequest.getSession();
             String account = httpServletRequest.getParameter("account");
             String password = httpServletRequest.getParameter("password");
             Long expireTime = Long.parseLong(httpServletRequest.getParameter("expireTime"));
             LoginSessionResponseBody res = userRespo.login(account, password, expireTime);
-            httpServletRequest.getSession().setAttribute("USERKEY", res.getToken());
+            session.setAttribute("USERKEY", res.getToken());
             return jsonUtil.getJSONString(200, res);
         } catch (NullPointerException | IllegalArgumentException e) {
             logger.error(e.getMessage());

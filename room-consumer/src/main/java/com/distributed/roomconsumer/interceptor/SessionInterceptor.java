@@ -25,16 +25,20 @@ public class SessionInterceptor implements HandlerInterceptor {
                 request.getParameter("userId") == null) {
             logger.error("session params exception");
             response.setHeader("statuscode", "305");
-            response.setHeader("set-cookie", "xxxxx");
             return false;
         }
         String token = (String) request.getSession().getAttribute("USERKEY");
         String userId = request.getParameter("userId");
+        if(sessionService.getSessionValue(userId) == null) {
+            return false;
+        }
         return sessionService.getSessionValue(userId).equals(token);
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
+        String userId = request.getParameter("userId");
+        sessionService.expireSession(userId, (long) (60 * 30));
     }
 
     @Override
