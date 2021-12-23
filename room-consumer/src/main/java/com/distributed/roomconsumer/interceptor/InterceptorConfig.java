@@ -23,8 +23,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
         InterceptorRegistration registration = registry.addInterceptor(sessionInterceptor);
         List<String> list = new ArrayList<>();
         list.add("/user/login");
-        list.add("/usr/register");
-        list.add("/usr/logout");
+        list.add("/user/register");
+        list.add("/user/logout");
         registration.addPathPatterns("/**").excludePathPatterns(list);
 
         //registration.excludePathPatterns("/**");

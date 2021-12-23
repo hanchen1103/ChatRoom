@@ -44,11 +44,12 @@ public class LoginController {
     @PostMapping(value = "/register", produces = {"application/json;charset=UTF-8"})
     public String register(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
+            HttpSession session = httpServletRequest.getSession();
             String account = httpServletRequest.getParameter("account");
             String password = httpServletRequest.getParameter("password");
             Long expireTime = Long.parseLong(httpServletRequest.getParameter("expireTime"));
             LoginSessionResponseBody res = ((UserLoginByAccoountServiceImpl) userRespo).register(account, password, expireTime);
-            httpServletRequest.getSession().setAttribute("USERKEY", res.getToken());
+            session.setAttribute("USERKEY", res.getToken());
             return jsonUtil.getJSONString(200, res);
         } catch (NullPointerException | IllegalArgumentException e) {
             logger.error(e.getMessage());
