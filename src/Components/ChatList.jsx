@@ -45,7 +45,6 @@ const ChatList = () => {
     }
   }, [initial]);
 
-  // handle new message.
   useEffect(() => {
     if (data[0].name) {
       if (
