@@ -4,7 +4,7 @@ import com.distributed.roomapi.model.Message;
 
 import java.util.List;
 
-public interface MessageResposity {
+public interface MessageService {
 
     /**
      * add a new message to db
@@ -14,5 +14,7 @@ public interface MessageResposity {
 
     List<Message> selectByFromIdAndToId(Integer fromId, Integer toId, Integer limit, Integer offset);
 
+    List<Message> selectUnReadMessage(Integer userId);
 
+    Message selectById(Integer messageId);
 }

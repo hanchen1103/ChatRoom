@@ -1,17 +1,16 @@
 package com.distributed.roomprovider.service.impl;
 
 import com.distributed.roomapi.model.Message;
-import com.distributed.roomapi.service.MessageResposity;
+import com.distributed.roomapi.service.MessageService;
 import com.distributed.roomprovider.mapper.MessageDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
 @com.alibaba.dubbo.config.annotation.Service
-public class MessageImpl implements MessageResposity {
+public class MessageImpl implements MessageService {
 
     @Autowired
     private MessageDAO messageDAO;
@@ -34,5 +33,15 @@ public class MessageImpl implements MessageResposity {
             throw new IllegalArgumentException("limit or offset error");
         }
         return messageDAO.selectMessageListByFromIdAndtoId(fromId, toId, limit, offset);
+    }
+
+    @Override
+    public List<Message> selectUnReadMessage(Integer userId) {
+        return null;
+    }
+
+    @Override
+    public Message selectById(Integer messageId) {
+        return null;
     }
 }

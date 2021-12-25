@@ -3,7 +3,7 @@ package com.distributed.roomconsumer.Service.impl.MessageImpl;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.distributed.roomapi.model.Message;
-import com.distributed.roomapi.service.MessageResposity;
+import com.distributed.roomapi.service.MessageService;
 import com.distributed.roomconsumer.Service.respoisty.MessageRespo;
 import com.distributed.roomconsumer.responsebody.ChatContactPersonResponseBody;
 import com.distributed.roomconsumer.responsebody.ChatProfileResponseBody;
@@ -16,7 +16,7 @@ import java.util.List;
 public class MessageResponseServiceImpl implements MessageRespo {
 
     @Reference
-    MessageResposity messageResposity;
+    MessageService messageResposity;
 
     @Override
     public ChatProfileResponseBody getFromIdAnd2IdProfile(Integer fromId, Integer toId,

@@ -28,4 +28,10 @@ public interface MessageDAO {
             " where fromId=#{fromId} and toId=#{toId} order by id desc limit #{limit}, #{offset}"})
     List<Message> selectMessageListByFromIdAndtoId(Integer fromId, Integer toId,
                                                    Integer limit, Integer offset);
+
+    @Select({"select ", SELECT_NAME, " from ", TABLE_NAME, "where toId = #{toId} and isRead = 1 order by id"})
+    List<Message> selectUnReadMessage(@Param("toId") Integer toId);
+
+    @Update({"update ", TABLE_NAME, " set isRead = 0 where toId = #{toId} and isRead = 1"})
+    Integer clearUnReadMessage(@Param("toId") Integer toId);
 }

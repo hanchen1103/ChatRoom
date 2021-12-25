@@ -45,6 +45,15 @@ public class JedisAdapter implements InitializingBean {
         return 0L;
     }
 
+    public String set(String key, String value) {
+        try (Jedis jedis = jedisPool.getResource()) {
+            return jedis.set(key, value);
+        } catch (Exception e) {
+            logger.error("redis error " + e.getMessage());
+        }
+        return null;
+    }
+
     public Long sadd(String key, String value) {
         try (Jedis jedis = jedisPool.getResource()) {
             return jedis.sadd(key, value);
