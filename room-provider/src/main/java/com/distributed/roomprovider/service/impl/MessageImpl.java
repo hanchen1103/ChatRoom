@@ -37,11 +37,25 @@ public class MessageImpl implements MessageService {
 
     @Override
     public List<Message> selectUnReadMessage(Integer userId) {
-        return null;
+        if(userId == null) {
+            throw new NullPointerException("param exception");
+        }
+        return messageDAO.selectUnReadMessage(userId);
     }
 
     @Override
     public Message selectById(Integer messageId) {
-        return null;
+        if(messageId == null) {
+            throw new NullPointerException("param exception");
+        }
+        return messageDAO.selectById(messageId);
+    }
+
+    @Override
+    public void clearUnReadMessage(Integer userId) {
+        if(userId == null) {
+            throw new NullPointerException("param exception");
+        }
+        messageDAO.clearUnReadMessage(userId);
     }
 }

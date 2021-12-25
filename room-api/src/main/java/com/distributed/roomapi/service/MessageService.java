@@ -17,4 +17,6 @@ public interface MessageService {
     List<Message> selectUnReadMessage(Integer userId);
 
     Message selectById(Integer messageId);
+
+    void clearUnReadMessage(Integer userId);
 }
