@@ -5,7 +5,7 @@ import com.distributed.roomapi.model.User;
 /**
  * user services collection
  */
-public interface UserResposity {
+public interface UserService {
 
     /**
      * query user by id

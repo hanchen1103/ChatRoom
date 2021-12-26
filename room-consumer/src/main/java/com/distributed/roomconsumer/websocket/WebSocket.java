@@ -4,8 +4,11 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.distributed.roomapi.model.Message;
+import com.distributed.roomapi.model.Profile;
 import com.distributed.roomapi.model.User;
 import com.distributed.roomapi.service.MessageService;
+import com.distributed.roomapi.service.ProfileService;
+import com.distributed.roomapi.service.UserService;
 import com.distributed.roomapi.service.WebSocketService;
 import com.distributed.roomconsumer.config.websocketConfig.CustomSpringConfigurator;
 import com.distributed.roomconsumer.util.jsonUtil;
@@ -30,6 +33,12 @@ public class WebSocket {
 
     @Reference
     MessageService messageService;
+
+    @Reference
+    UserService userService;
+
+    @Reference
+    ProfileService profileService;
 
     private Integer userId;
 
@@ -58,9 +67,9 @@ public class WebSocket {
                     Map<String, Object> map = new HashMap<>();
                     map.put("message", message);
                     Integer fromId = message.getFromId();
-//                    User user = userService.selectById(fromId);
-//                    map.put("head_url", user.getHead_url());
-//                    map.put("name", user.getAccount());
+                    Profile profile = profileService.getProfileByUserId(fromId);
+                    map.put("headUrl", profile.getHeadUrl());
+                    map.put("nickName", profile.getNickName());
                     unReadList.add(map);
                 }
                 String mes = jsonUtil.getJSONString(0, unReadList);
@@ -89,12 +98,12 @@ public class WebSocket {
         messageDto.setIsRead(0);
         messageDto.setStatus(0);
         messageDto.setCreateDate(new Date());
-//        User toUser = userService.selectById(toId);
-//        User fromUser = userService.selectById(userId);
-//        if(toUser == null || toUser.getStatus() > 0 || fromUser == null || fromUser.getStatus() > 0) {
-//            logger.error("User exception");
-//            return ;
- //       }
+        User toUser = userService.selectUserById(toId);
+        User fromUser = userService.selectUserById(userId);
+        if(toUser == null || toUser.getStatus() > 0 || fromUser == null || fromUser.getStatus() > 0) {
+            logger.error("User exception");
+            return ;
+        }
         try {
             if(webSocketService.containsSocket(toId)) {
                 getSocket(toId).sendMessage(message);

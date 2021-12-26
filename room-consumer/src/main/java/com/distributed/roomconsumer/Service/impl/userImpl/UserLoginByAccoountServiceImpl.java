@@ -4,7 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.distributed.roomapi.model.User;
 import com.distributed.roomapi.service.SessionService;
-import com.distributed.roomapi.service.UserResposity;
+import com.distributed.roomapi.service.UserService;
 import com.distributed.roomconsumer.Service.respoisty.UserRespo;
 import com.distributed.roomconsumer.responsebody.LoginSessionResponseBody;
 import com.distributed.roomconsumer.util.newProjectUtil;
@@ -17,7 +17,7 @@ import java.util.UUID;
 public class UserLoginByAccoountServiceImpl implements UserRespo {
 
     @Reference
-    UserResposity userResposity;
+    UserService userResposity;
 
     @Reference
     SessionService sessionService;
