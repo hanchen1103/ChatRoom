@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/room-api/pom.xml" />
         <option value="$PROJECT_DIR$/room-provider/pom.xml" />
         <option value="$PROJECT_DIR$/room-consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/mqconsumer/pom.xml" />
       </list>
     </option>
   </component>
