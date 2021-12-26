@@ -4,10 +4,11 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.distributed.roomapi.model.Profile;
 import com.distributed.roomapi.service.ProfileService;
+import com.distributed.roomconsumer.Service.respoisty.ProfileRespoisty;
 
 @Service
 @org.springframework.stereotype.Service
-public class ProfileServiceImpl {
+public class ProfileServiceImpl implements ProfileRespoisty {
 
     @Reference
     ProfileService profileService;
