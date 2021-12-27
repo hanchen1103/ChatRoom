@@ -25,6 +25,7 @@ public class LoginController {
     @Resource
     UserLoginByAccoountServiceImpl userRespo;
 
+
     @PostMapping(value = "/login", produces = {"application/json;charset=UTF-8"})
     public String Login(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
@@ -34,6 +35,7 @@ public class LoginController {
             Long expireTime = Long.parseLong(httpServletRequest.getParameter("expireTime"));
             LoginSessionResponseBody res = userRespo.login(account, password, expireTime);
             session.setAttribute("USERKEY", res.getToken());
+
             return jsonUtil.getJSONString(200, res);
         } catch (NullPointerException | IllegalArgumentException e) {
             logger.error(e.getMessage());

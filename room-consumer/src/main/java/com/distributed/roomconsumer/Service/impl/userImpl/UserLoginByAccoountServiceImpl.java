@@ -2,13 +2,17 @@ package com.distributed.roomconsumer.Service.impl.userImpl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.distributed.roomapi.model.Message;
 import com.distributed.roomapi.model.User;
 import com.distributed.roomapi.service.SessionService;
 import com.distributed.roomapi.service.UserService;
 import com.distributed.roomconsumer.Service.respoisty.UserRespo;
+import com.distributed.roomconsumer.config.MQConfig.KafkaProducer;
 import com.distributed.roomconsumer.responsebody.LoginSessionResponseBody;
 import com.distributed.roomconsumer.util.newProjectUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -21,6 +25,9 @@ public class UserLoginByAccoountServiceImpl implements UserRespo {
 
     @Reference
     SessionService sessionService;
+
+    @Autowired
+    KafkaProducer kafkaProducer;
 
     @Override
     public LoginSessionResponseBody login(String account, String password, Long expireTime) {
@@ -38,6 +45,15 @@ public class UserLoginByAccoountServiceImpl implements UserRespo {
         LoginSessionResponseBody loginSessionResponseBody = new LoginSessionResponseBody();
         loginSessionResponseBody.setUser(user);
         loginSessionResponseBody.setToken(res);
+        Message message = new Message();
+        message.setIsRead(1);
+        message.setCreateDate(new Date());
+        message.setContent("login");
+        message.setStatus(0);
+        message.setType(1);
+        message.setFromId(1);
+        message.setToId(2);
+        kafkaProducer.sendMessageTopic(message);
         return loginSessionResponseBody;
     }
 

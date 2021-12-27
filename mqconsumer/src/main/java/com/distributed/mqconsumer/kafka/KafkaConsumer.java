@@ -30,6 +30,7 @@ public class KafkaConsumer {
     public void consumeSendMessage(ConsumerRecord<?, ?> record, Acknowledgment ack,
                                @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
         Optional message = Optional.ofNullable(record.value());
+        logger.info(message.toString());
         if (message.isPresent()) {
             String msg = String.valueOf(message.get());
             Message sentMessage = JSON.parseObject(msg, Message.class);
@@ -39,16 +40,16 @@ public class KafkaConsumer {
         }
     }
 
-    @KafkaListener(topics = KafkaTopic.TOPIC_MESSAGE, groupId = KafkaTopic.TOPIC_MESSAGE)
-    public void consumeClearMessage(ConsumerRecord<?, ?> record, Acknowledgment ack,
-                               @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
-        Optional message = Optional.ofNullable(record.value());
-        if (message.isPresent()) {
-            String msg = String.valueOf(message.get());
-            JSONObject jsonObject = JSON.parseObject(msg);
-            messageService.clearUnReadMessage(jsonObject.getInteger("userId"));
-            logger.info(KafkaTopic.TOPIC_MESSAGE + " consumed： Topic:" + topic + ",Message:" + msg);
-            ack.acknowledge();
-        }
-    }
+//    @KafkaListener(topics = KafkaTopic.TOPIC_MESSAGE, groupId = KafkaTopic.TOPIC_MESSAGE)
+//    public void consumeClearMessage(ConsumerRecord<?, ?> record, Acknowledgment ack,
+//                               @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
+//        Optional message = Optional.ofNullable(record.value());
+//        if (message.isPresent()) {
+//            String msg = String.valueOf(message.get());
+//            JSONObject jsonObject = JSON.parseObject(msg);
+//            messageService.clearUnReadMessage(jsonObject.getInteger("userId"));
+//            logger.info(KafkaTopic.TOPIC_MESSAGE + " consumed： Topic:" + topic + ",Message:" + msg);
+//            ack.acknowledge();
+//        }
+//    }
 }

@@ -23,7 +23,7 @@ public class KafkaProducer {
 
     public void sendMessageTopic(Object obj) {
         String obj2String = JSON.toJSONString(obj);
-        logger.info("Ready to send a message as:{}", obj2String);
+        logger.info("Ready to send a message as:" + obj2String);
         //send message
         ListenableFuture<SendResult<String, Object>> future = kafkaTemplate.send(KafkaTopic.TOPIC_MESSAGE, obj2String);
         future.addCallback(new ListenableFutureCallback<>() {
