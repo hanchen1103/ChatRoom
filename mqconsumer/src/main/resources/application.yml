@@ -19,7 +19,9 @@ dubbo:
 
 spring:
   kafka:
-    bootstrap-servers: 110.40.192.207:9092
+    bootstrap-servers: localhost:9091, localhost:9092, localhost:9093
+    listener:
+      ack-mode: manual_immediate
     consumer:
       # 自动提交的时间间隔 在spring boot 2.X 版本中这里采用的是值的类型为Duration 需要符合特定的格式，如1S,1M,2H,5D
       auto-commit-interval: 1S

@@ -10,4 +10,5 @@ public class KafkaTopic implements Serializable {
     private static final long serialVersionUID = -7670160619837224918L;
 
     public static final String TOPIC_MESSAGE = "TOPIC.MESSAGE";
+
 }

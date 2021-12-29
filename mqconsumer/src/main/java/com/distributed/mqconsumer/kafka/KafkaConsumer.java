@@ -2,7 +2,6 @@ package com.distributed.mqconsumer.kafka;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.distributed.roomapi.model.KafkaTopic;
 import com.distributed.roomapi.model.Message;
 import com.distributed.roomapi.service.MessageService;

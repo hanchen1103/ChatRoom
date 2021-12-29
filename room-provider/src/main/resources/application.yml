@@ -44,7 +44,7 @@ spring:
         max-wait: -1ms
         min-idle: 8
   kafka:
-    bootstrap-servers: 110.40.192.207:9092
+    bootstrap-servers: localhost:9091, localhost:9092, localhost:9093
     producer:
       # 发生错误后，消息重发的次数。
       retries: 0
