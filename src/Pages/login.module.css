@@ -1,0 +1,72 @@
+.loginPage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100vw;
+    background: #f12711;
+    background: -webkit-linear-gradient(to right, #f5af19, #f12711);
+    background: linear-gradient(to right, #f5af19, #f12711);
+    background-image: url("../Assets/pictures/javier-saint-jean-yyuiPPjddsE-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.loginContent {
+    width: 50vw;
+    height: 80vh;
+    border-radius: 10px;
+    backdrop-filter: blur(25px);
+    /* background: #FDC830;
+    background: -webkit-linear-gradient(to left, #F37335, #FDC830);
+    background: linear-gradient(to left, #F37335, #FDC830); */
+    box-shadow: 5px 5px 15px #000;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    backdrop-filter: blur(25px);
+}
+
+.mainContent {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.mainContent input {
+    margin-top: 2rem;
+    padding: 0 1rem;
+    height: 2.5rem;
+    border: 2px solid #000;
+    border-radius: 10px;
+}
+
+.mainContent span {
+    margin: 0.5rem 0;
+    cursor: pointer;
+    align-self: flex-end;
+    font-weight: bolder;
+    transition: all 0.5s;
+}
+
+.mainContent span:hover {
+    color: #3b2113;
+}
+
+.mainContent button {
+    height: 2.5rem;
+    margin-top: 1rem;
+}
+
+.mainContent button:hover {
+    background-color: #000;
+    color: #fff;
+}
