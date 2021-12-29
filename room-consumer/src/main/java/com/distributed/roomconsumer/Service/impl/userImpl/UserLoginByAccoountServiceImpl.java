@@ -45,15 +45,6 @@ public class UserLoginByAccoountServiceImpl implements UserRespo {
         LoginSessionResponseBody loginSessionResponseBody = new LoginSessionResponseBody();
         loginSessionResponseBody.setUser(user);
         loginSessionResponseBody.setToken(res);
-        Message message = new Message();
-        message.setIsRead(1);
-        message.setCreateDate(new Date());
-        message.setContent("login");
-        message.setStatus(0);
-        message.setType(1);
-        message.setFromId(1);
-        message.setToId(2);
-        kafkaProducer.sendMessageTopic(message);
         return loginSessionResponseBody;
     }
 

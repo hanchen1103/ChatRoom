@@ -10,10 +10,12 @@ import com.distributed.roomapi.service.MessageService;
 import com.distributed.roomapi.service.ProfileService;
 import com.distributed.roomapi.service.UserService;
 import com.distributed.roomapi.service.WebSocketService;
+import com.distributed.roomconsumer.config.MQConfig.KafkaProducer;
 import com.distributed.roomconsumer.config.websocketConfig.CustomSpringConfigurator;
 import com.distributed.roomconsumer.util.jsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
@@ -39,6 +41,9 @@ public class WebSocket {
 
     @Reference
     ProfileService profileService;
+
+    @Autowired
+    KafkaProducer kafkaProducer;
 
     private Integer userId;
 
@@ -110,7 +115,7 @@ public class WebSocket {
             } else {
                 messageDto.setIsRead(1);
             }
-            messageService.addMessage(messageDto);
+            kafkaProducer.sendMessageTopic(messageDto);
         } catch (IOException e) {
             logger.error("Sendmessage error:" + e.getMessage());
         }
