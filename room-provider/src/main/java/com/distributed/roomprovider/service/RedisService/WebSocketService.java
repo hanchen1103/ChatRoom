@@ -1,7 +1,6 @@
 package com.distributed.roomprovider.service.RedisService;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.distributed.roomprovider.util.JedisAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

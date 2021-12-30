@@ -1,14 +1,14 @@
 package com.distributed.roomprovider.service.impl;
 
 import com.distributed.roomapi.model.User;
-import com.distributed.roomapi.service.UserService;
+import com.distributed.roomapi.service.UserLoginService;
 import com.distributed.roomprovider.mapper.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @com.alibaba.dubbo.config.annotation.Service
-public class UserImpl implements UserService {
+public class UserLoginImpl implements UserLoginService {
 
     @Autowired
     UserDAO userDAO;

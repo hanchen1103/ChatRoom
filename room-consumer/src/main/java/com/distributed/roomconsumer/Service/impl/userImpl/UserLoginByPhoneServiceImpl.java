@@ -1,13 +1,12 @@
 package com.distributed.roomconsumer.Service.impl.userImpl;
 
-import com.distributed.roomapi.model.User;
-import com.distributed.roomconsumer.Service.respoisty.UserRespo;
+import com.distributed.roomconsumer.Service.resposity.UserLoginResposity;
 import com.distributed.roomconsumer.responsebody.LoginSessionResponseBody;
 import org.springframework.stereotype.Service;
 
 @Service
 @com.alibaba.dubbo.config.annotation.Service
-public class UserLoginByPhoneServiceImpl implements UserRespo {
+public class UserLoginByPhoneServiceImpl implements UserLoginResposity {
 
 
     @Override

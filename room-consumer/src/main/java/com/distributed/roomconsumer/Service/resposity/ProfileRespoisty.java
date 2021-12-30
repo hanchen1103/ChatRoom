@@ -1,4 +1,4 @@
-package com.distributed.roomconsumer.Service.respoisty;
+package com.distributed.roomconsumer.Service.resposity;
 
 import com.distributed.roomapi.model.Profile;
 

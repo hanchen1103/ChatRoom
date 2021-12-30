@@ -1,6 +1,6 @@
 package com.distributed.roomconsumer.controller;
 
-import com.distributed.roomconsumer.Service.respoisty.MessageRespo;
+import com.distributed.roomconsumer.Service.resposity.MessageResposity;
 import com.distributed.roomconsumer.util.jsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,7 @@ public class MessageController {
     private static final Logger logger = LoggerFactory.getLogger(MessageController.class);
 
     @Resource
-    MessageRespo messageRespo;
+    MessageResposity messageRespo;
 
     @PostMapping(value = "/send", produces = "application/json;charset=UTF-8")
     public String sendMsg(HttpServletRequest httpServletRequest) {

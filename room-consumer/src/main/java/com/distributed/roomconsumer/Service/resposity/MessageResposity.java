@@ -1,4 +1,4 @@
-package com.distributed.roomconsumer.Service.respoisty;
+package com.distributed.roomconsumer.Service.resposity;
 
 import com.distributed.roomconsumer.responsebody.ChatContactPersonResponseBody;
 import com.distributed.roomconsumer.responsebody.ChatProfileResponseBody;
@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * message services
  */
-public interface MessageRespo {
+public interface MessageResposity {
 
     /**
      * get user's current chat profile

@@ -1,11 +1,10 @@
 package com.distributed.roomconsumer.Service.factory;
 
-import com.distributed.roomapi.model.User;
-import com.distributed.roomconsumer.Service.respoisty.UserRespo;
+import com.distributed.roomconsumer.Service.resposity.UserLoginResposity;
 import com.distributed.roomconsumer.responsebody.LoginSessionResponseBody;
 
 
-public abstract class UserLoginAbstractService implements UserRespo {
+public abstract class UserLoginAbstractService implements UserLoginResposity {
 
 
     @Override

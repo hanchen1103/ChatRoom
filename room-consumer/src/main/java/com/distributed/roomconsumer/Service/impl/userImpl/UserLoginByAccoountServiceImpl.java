@@ -2,26 +2,24 @@ package com.distributed.roomconsumer.Service.impl.userImpl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
-import com.distributed.roomapi.model.Message;
 import com.distributed.roomapi.model.User;
 import com.distributed.roomapi.service.SessionService;
-import com.distributed.roomapi.service.UserService;
-import com.distributed.roomconsumer.Service.respoisty.UserRespo;
+import com.distributed.roomapi.service.UserLoginService;
+import com.distributed.roomconsumer.Service.resposity.UserLoginResposity;
 import com.distributed.roomconsumer.config.MQConfig.KafkaProducer;
 import com.distributed.roomconsumer.responsebody.LoginSessionResponseBody;
 import com.distributed.roomconsumer.util.newProjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
 @Service
 @org.springframework.stereotype.Service
-public class UserLoginByAccoountServiceImpl implements UserRespo {
+public class UserLoginByAccoountServiceImpl implements UserLoginResposity {
 
     @Reference
-    UserService userResposity;
+    UserLoginService userResposity;
 
     @Reference
     SessionService sessionService;

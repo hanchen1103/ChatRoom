@@ -1,15 +1,15 @@
 package com.distributed.roomconsumer.websocket;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.distributed.roomapi.model.Message;
 import com.distributed.roomapi.model.Profile;
 import com.distributed.roomapi.model.User;
-import com.distributed.roomapi.service.MessageService;
 import com.distributed.roomapi.service.ProfileService;
-import com.distributed.roomapi.service.UserService;
-import com.distributed.roomapi.service.WebSocketService;
+import com.distributed.roomconsumer.Service.impl.WebSocketImpl.ConWebSocketService;
+import com.distributed.roomconsumer.Service.resposity.MessageResposity;
+import com.distributed.roomconsumer.Service.resposity.ProfileRespoisty;
+import com.distributed.roomconsumer.Service.resposity.UserQueryResposity;
 import com.distributed.roomconsumer.config.MQConfig.KafkaProducer;
 import com.distributed.roomconsumer.config.websocketConfig.CustomSpringConfigurator;
 import com.distributed.roomconsumer.util.jsonUtil;
@@ -22,25 +22,28 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 
 @ServerEndpoint(value = "/websocket/{userId}", configurator = CustomSpringConfigurator.class)
 @Component
-public class WebSocket {
+public class WebSocket implements Serializable {
 
     private static final Logger logger = LoggerFactory.getLogger(WebSocket.class);
 
-    @Reference
-    WebSocketService webSocketService;
+    private static final long serialVersionUID = -6176509130841513788L;
 
-    @Reference
-    MessageService messageService;
+    @Autowired
+    ConWebSocketService webSocketService;
 
-    @Reference
-    UserService userService;
+    @Autowired
+    MessageResposity messageResposity;
 
-    @Reference
-    ProfileService profileService;
+    @Autowired
+    UserQueryResposity userQueryResposity;
+
+    @Autowired
+    ProfileRespoisty profileRespoisty;
 
     @Autowired
     KafkaProducer kafkaProducer;
@@ -65,7 +68,7 @@ public class WebSocket {
             webSocketService.addUserAndSocket2Redis(userId, this);
             logger.info("Welcome to connect websocket, user: " + this.userId +
                     " current online num is: "+ webSocketService.getSumOfSocket());
-            List<Message> list = messageService.selectUnReadMessage(this.userId);
+            List<Message> list = messageRespo.selectUnReadMessage(this.userId);
             try {
                 List<Map<String, Object>> unReadList = new ArrayList<>();
                 for(Message message : list) {

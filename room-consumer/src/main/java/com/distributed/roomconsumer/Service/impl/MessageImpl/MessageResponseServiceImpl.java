@@ -4,7 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.distributed.roomapi.model.Message;
 import com.distributed.roomapi.service.MessageService;
-import com.distributed.roomconsumer.Service.respoisty.MessageRespo;
+import com.distributed.roomconsumer.Service.resposity.MessageResposity;
 import com.distributed.roomconsumer.responsebody.ChatContactPersonResponseBody;
 import com.distributed.roomconsumer.responsebody.ChatProfileResponseBody;
 
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @org.springframework.stereotype.Service
-public class MessageResponseServiceImpl implements MessageRespo {
+public class MessageResponseServiceImpl implements MessageResposity {
 
     @Reference
     MessageService messageResposity;

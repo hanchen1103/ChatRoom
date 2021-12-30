@@ -14,7 +14,7 @@ dubbo:
     port: 20886
 
 server:
-  port: 6666
+  port: 7006
 
 spring:
   servlet:
@@ -64,10 +64,8 @@ spring:
 #showSql
 logging:
   level:
-    com:
-      distributed:
-        roomconsumer:
-          mapper: debug
+    org:
+      springframework: DEBUG
 
 
 file:
