@@ -1,0 +1,56 @@
+.loginPage{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("https://images.pexels.com/photos/825904/pexels-photo-825904.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.loginContent{
+    width: 60vw;
+    height: 70vh;
+    backdrop-filter: blur(20px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainContent{
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.input{
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    border: 2px solid #000;
+}
+
+.logBtn{
+    margin: 1rem 0;
+    height: 2rem;
+    transition: all 0.5s;
+}
+
+.regBtn{
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.regBtn:hover{
+    color: brown;
+}
+
+.logBtn:hover{
+    color: #fff;
+    background-color: #000;
+}

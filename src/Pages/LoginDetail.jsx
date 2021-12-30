@@ -5,7 +5,7 @@ import { login } from "../state/reducers/accountReducer";
 import { addUserRecord } from "../state/reducers/userInfo";
 import { Background } from "../Components";
 import { useNavigate } from "react-router";
-import styles from './login.module.css';
+import styles from "./login.module.css";
 import logo from "../Assets/pictures/log.png";
 
 const LoginDetail = () => {
@@ -66,13 +66,15 @@ const LoginDetail = () => {
   return (
     <div className={styles.loginPage}>
       <div className={styles.loginContent}>
-        <h1>Login</h1>
-        <input placeholder="Username" />
-        <input placeholder="Password" />
-        <span>Register</span>
-        <button >Login</button>
-      </div>     
-     </div>
+        <div className={styles.mainContent}>
+          <h1 className={styles.header}>Login</h1>
+          <input className={styles.input} placeholder="Username" />
+          <input className={styles.input} placeholder="Password" />
+          <span className={styles.regBtn}>Register</span>
+          <button className={styles.logBtn}>Login</button>
+        </div>
+      </div>
+    </div>
   );
 };
 
