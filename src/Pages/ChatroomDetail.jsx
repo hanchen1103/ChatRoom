@@ -10,14 +10,18 @@ const ChatroomDetail = () => {
   const dispatch = useDispatch();
   const fromId = sessionStorage.getItem("userId");
   const [input, setInput] = useState("");
-
+  const chatListId = useSelector((state) => state.chatListId.value); 
   //const [msgList, setMsgList] = useState([]);
   //const [initial, setInitia] = useState(true);
 
   useEffect(() => {
+    console.log(chatListId);
+  },[chatListId]);
+
+  useEffect(() => {
     let ele = document.querySelector(".ChatroomMsgList");
     ele.scroll(0, 5000);
-  });
+  },[]);
 
   const postData = useCallback(() => {
     if (input.length > 0) {

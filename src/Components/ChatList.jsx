@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import Avatar from "../Assets/pictures/robot-man.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { SetChatListId } from "../state/reducers/chatListReducer";
 
 const ChatList = () => {
   const [finalList, setFinalList] = useState([]);
   const [selectedId, setSelectedId] = useState(-1);
   const [list, setList] = useState([]);
+  const dispatch = useDispatch();
+  const curSeleId = useSelector((state) => state.chatListId.value);
   const [initial, setInitial] = useState(true);
   const data = useSelector((state) => state.socket.value);
 
@@ -43,7 +46,7 @@ const ChatList = () => {
       ];
       setList(tempData);
     }
-  }, [initial]);
+  }, []);
 
   // handle new message.
   useEffect(() => {
@@ -109,7 +112,11 @@ const ChatList = () => {
 
   useEffect(() => {
     if (selectedId >= 0) {
+      dispatch(SetChatListId(selectedId));
       let tempList = finalList;
+      for(let i = 0; i<tempList.length; i++) {
+        tempList[i].selected = false;
+      }
       tempList[selectedId].selected = true;
       setFinalList(tempList);
       setInitial((prev) => !prev);
