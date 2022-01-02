@@ -54,6 +54,8 @@ public class WebSocket implements Serializable {
 
     private static final Object obj = new Object();
 
+    private static HashMap<Integer, WebSocket> webSocketMap = new HashMap<>();
+
     @OnOpen
     public void onOpen(Session session, @PathParam("userId") Integer userId) {
         if(userId == null) {
@@ -64,28 +66,28 @@ public class WebSocket implements Serializable {
             this.userId = userId;
             if(webSocketService.containsSocket(userId)) {
                 webSocketService.deleteUserInRedis(userId);
+                webSocketMap.remove(userId);
             }
-            webSocketService.addUserAndSocket2Redis(userId, this);
+            webSocketMap.put(userId, this);
+            webSocketService.addUserAndSocket2Redis(userId);
             logger.info("Welcome to connect websocket, user: " + this.userId +
                     " current online num is: "+ webSocketService.getSumOfSocket());
-            List<Message> list = messageRespo.selectUnReadMessage(this.userId);
+            List<Message> list = messageResposity.selectUnReadMessage(this.userId);
             try {
                 List<Map<String, Object>> unReadList = new ArrayList<>();
                 for(Message message : list) {
                     Map<String, Object> map = new HashMap<>();
                     map.put("message", message);
                     Integer fromId = message.getFromId();
-                    Profile profile = profileService.getProfileByUserId(fromId);
+                    Profile profile = profileRespoisty.selectByUserId(fromId);
                     map.put("headUrl", profile.getHeadUrl());
                     map.put("nickName", profile.getNickName());
                     unReadList.add(map);
                 }
                 String mes = jsonUtil.getJSONString(0, unReadList);
                 logger.info(mes);
-                String socketJsonString = webSocketService.getSocketByUserId(userId);
-                WebSocket webSocket = JSONObject.parseObject(socketJsonString, WebSocket.class);
-                webSocket.sendMessage(mes);
-                messageService.clearUnReadMessage(this.userId);
+                webSocketMap.get(this.userId).sendMessage(mes);
+                kafkaProducer.clearUnReadMessageTopic(this.userId);
             } catch (IOException e) {
                 logger.error(e.getMessage());
             }
@@ -106,15 +108,15 @@ public class WebSocket implements Serializable {
         messageDto.setIsRead(0);
         messageDto.setStatus(0);
         messageDto.setCreateDate(new Date());
-        User toUser = userService.selectUserById(toId);
-        User fromUser = userService.selectUserById(userId);
+        User toUser = userQueryResposity.selectUserById(toId);
+        User fromUser = userQueryResposity.selectUserById(userId);
         if(toUser == null || toUser.getStatus() > 0 || fromUser == null || fromUser.getStatus() > 0) {
             logger.error("User exception");
             return ;
         }
         try {
             if(webSocketService.containsSocket(toId)) {
-                getSocket(toId).sendMessage(message);
+                webSocketMap.get(toId).sendMessage(message);
             } else {
                 messageDto.setIsRead(1);
             }
@@ -127,11 +129,11 @@ public class WebSocket implements Serializable {
     @OnClose
     public void onClose() {
         synchronized (obj) {
-            if(webSocketService.containsSocket(userId)) {
-                webSocketService.deleteUserInRedis(userId);
-            }
-            logger.info("one connection close currnet online num is: " + webSocketService.getSumOfSocket());
+            webSocketService.deleteUserInRedis(userId);
+            webSocketMap.remove(userId);
         }
+        logger.info("one connection close currnet online num is: " + webSocketService.getSumOfSocket());
+
     }
 
 
@@ -145,9 +147,4 @@ public class WebSocket implements Serializable {
         this.session.getBasicRemote().sendText(message);
     }
 
-
-    public WebSocket getSocket(Integer userId) {
-        String socketJsonString = webSocketService.getSocketByUserId(userId);
-        return JSONObject.parseObject(socketJsonString, WebSocket.class);
-    }
 }

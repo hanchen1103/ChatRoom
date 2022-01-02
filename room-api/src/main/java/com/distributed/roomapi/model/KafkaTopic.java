@@ -11,7 +11,6 @@ public class KafkaTopic implements Serializable {
 
     public static final String TOPIC_MESSAGE = "TOPIC.MESSAGE";
 
-
     public static final String TOPIC_CLEAR = "TOPIC.CLEAR.MESSAGE";
 
 

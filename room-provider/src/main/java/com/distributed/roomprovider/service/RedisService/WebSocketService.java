@@ -20,10 +20,8 @@ public class WebSocketService implements com.distributed.roomapi.service.WebSock
     }
 
     @Override
-    public void addUserAndSocket2Redis(Integer userId, Object object) {
-        String jsonObject = JSON.toJSON(object).toString();
+    public void addUserAndSocket2Redis(Integer userId) {
         jedisAdapter.sadd(WEB_SOCKET_PARAM, String.valueOf(userId));
-        jedisAdapter.set(WEB_SOCKET_PARAM + userId, jsonObject);
     }
 
     @Override

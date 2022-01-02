@@ -1,7 +1,6 @@
-package com.distributed.roomapi.service;
+package com.distributed.roomconsumer.Service.resposity;
 
-
-public interface WebSocketService {
+public interface WebSocketResposity {
 
     Boolean containsSocket(Integer userId);
 
@@ -12,5 +11,4 @@ public interface WebSocketService {
     String getSocketByUserId(Integer userId);
 
     Long getSumOfSocket();
-
 }

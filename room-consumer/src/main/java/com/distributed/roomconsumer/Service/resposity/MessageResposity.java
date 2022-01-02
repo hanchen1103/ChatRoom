@@ -1,5 +1,6 @@
 package com.distributed.roomconsumer.Service.resposity;
 
+import com.distributed.roomapi.model.Message;
 import com.distributed.roomconsumer.responsebody.ChatContactPersonResponseBody;
 import com.distributed.roomconsumer.responsebody.ChatProfileResponseBody;
 
@@ -30,4 +31,8 @@ public interface MessageResposity {
 
 
     List<ChatContactPersonResponseBody> selectContactByFromIdAnd2Id(Integer userId);
+
+    List<Message> selectUnReadMessage(Integer userId);
+
+    void clearUnReadMessage(Integer userId);
 }

@@ -41,4 +41,25 @@ public class KafkaProducer {
         });
     }
 
+
+    public void clearUnReadMessageTopic(Object obj) {
+        String obj2String = JSON.toJSONString(obj);
+        logger.info("Ready to clear messages as:" + obj2String);
+        //send message
+        ListenableFuture<SendResult<String, Object>> future = kafkaTemplate.send(KafkaTopic.TOPIC_CLEAR, obj2String);
+        future.addCallback(new ListenableFutureCallback<>() {
+            @Override
+            public void onFailure(Throwable throwable) {
+                //failure
+                logger.info(KafkaTopic.TOPIC_MESSAGE + " - producer failed send message:" + throwable.getMessage());
+            }
+
+            @Override
+            public void onSuccess(SendResult<String, Object> stringObjectSendResult) {
+                //成功的处理
+                logger.info(KafkaTopic.TOPIC_MESSAGE + " - producer success send message:" + stringObjectSendResult.toString());
+            }
+        });
+    }
+
 }

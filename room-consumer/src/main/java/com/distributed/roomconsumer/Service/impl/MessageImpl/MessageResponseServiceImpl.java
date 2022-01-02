@@ -56,4 +56,14 @@ public class MessageResponseServiceImpl implements MessageResposity {
     public List<ChatContactPersonResponseBody> selectContactByFromIdAnd2Id(Integer userId) {
         return null;
     }
+
+    @Override
+    public List<Message> selectUnReadMessage(Integer userId) {
+        return messageResposity.selectUnReadMessage(userId);
+    }
+
+    @Override
+    public void clearUnReadMessage(Integer userId) {
+        messageResposity.clearUnReadMessage(userId);
+    }
 }
