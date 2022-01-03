@@ -81,7 +81,7 @@ spring:
       ack-mode: manual_immediate
       missing-topics-fatal: false
   elasticsearch:
-    uris: 110.40.192.207:9200
+    uris: localhost:9200
 
 server:
   port: 6669

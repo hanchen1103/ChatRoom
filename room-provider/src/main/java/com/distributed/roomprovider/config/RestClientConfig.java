@@ -1,4 +1,4 @@
-package com.distributed.roomconsumer.config.elasticConfig;
+package com.distributed.roomprovider.config;
 
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.context.annotation.Bean;

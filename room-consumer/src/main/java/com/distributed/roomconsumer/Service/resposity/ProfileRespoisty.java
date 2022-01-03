@@ -4,7 +4,6 @@ import com.distributed.roomapi.model.Profile;
 
 public interface ProfileRespoisty {
 
-
     Integer addProfile(Profile profile);
 
     Profile selectByUserId(Integer userId);

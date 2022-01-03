@@ -62,11 +62,16 @@ public class KafkaConsumer {
                                     @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
         Optional message = Optional.ofNullable(record.value());
         if (message.isPresent()) {
-            String msg = String.valueOf(message.get());
-            Profile profile = JSON.parseObject(msg, Profile.class);
-            profileService.addProfile(profile);
-            logger.info(KafkaTopic.TOPIC_PROFILE + " consumed： Topic:" + topic + ",Message:" + msg);
-            ack.acknowledge();
+            try {
+                String msg = String.valueOf(message.get());
+                Profile profile = JSON.parseObject(msg, Profile.class);
+                profileService.addProfile(profile);
+                logger.info(KafkaTopic.TOPIC_PROFILE + " consumed： Topic:" + topic + ",Message:" + msg);
+                logger.info(profileService.getProfileByUserId(profile.getUserId()).toString());
+                ack.acknowledge();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

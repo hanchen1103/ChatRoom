@@ -1,4 +1,4 @@
-package com.distributed.roomconsumer.Service.profileImpl;
+package com.distributed.roomconsumer.Service.impl.profileImpl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.distributed.roomapi.model.Profile;
