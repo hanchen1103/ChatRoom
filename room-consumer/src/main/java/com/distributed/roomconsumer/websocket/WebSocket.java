@@ -86,7 +86,9 @@ public class WebSocket implements Serializable {
                 }
                 String mes = jsonUtil.getJSONString(0, unReadList);
                 logger.info(mes);
-                webSocketMap.get(this.userId).sendMessage(mes);
+                if(mes != null) {
+                    webSocketMap.get(this.userId).sendMessage(mes);
+                }
                 kafkaProducer.clearUnReadMessageTopic(this.userId);
             } catch (IOException e) {
                 logger.error(e.getMessage());

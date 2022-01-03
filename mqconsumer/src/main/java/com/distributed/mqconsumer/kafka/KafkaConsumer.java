@@ -46,8 +46,7 @@ public class KafkaConsumer {
         Optional message = Optional.ofNullable(record.value());
         if (message.isPresent()) {
             String msg = String.valueOf(message.get());
-            JSONObject jsonObject = JSON.parseObject(msg);
-            messageService.clearUnReadMessage(jsonObject.getInteger("userId"));
+            messageService.clearUnReadMessage(Integer.parseInt(msg));
             logger.info(KafkaTopic.TOPIC_MESSAGE + " consumed： Topic:" + topic + ",Message:" + msg);
             ack.acknowledge();
         }
