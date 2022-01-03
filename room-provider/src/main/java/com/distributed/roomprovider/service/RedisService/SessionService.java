@@ -19,7 +19,7 @@ public class SessionService implements com.distributed.roomapi.service.SessionSe
 
     @Override
     public String addSession2Redis(Integer userId, Long timeValue) {
-        if(userId == null ) {
+        if(userId == null) {
             throw new NullPointerException("param null");
         }
         String value = UUID.randomUUID().toString().substring(16);

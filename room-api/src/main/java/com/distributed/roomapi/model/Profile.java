@@ -9,6 +9,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @Document(indexName = "profile_index", createIndex = true)
@@ -23,7 +24,7 @@ public class Profile implements Serializable {
     @Field(type = FieldType.Integer)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    private Integer createDate;
+    private Date createDate;
 
     @Field(type = FieldType.Integer)
     private Integer userId;

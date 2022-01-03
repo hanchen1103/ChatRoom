@@ -1,4 +1,4 @@
-package com.distributed.roomconsumer.interceptor;
+package com.distributed.roomconsumer.config.webConfig;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +28,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
                     .addResourceLocations("file:D://picture/");
         } else {  //linux 和mac
             registry.addResourceHandler("/image/**")
-                    .addResourceLocations("file:/usr/img/") ;
+                    .addResourceLocations("file:/Users/hanchenzhu/Pictures/img/") ;
         }
         super.addResourceHandlers(registry);
     }

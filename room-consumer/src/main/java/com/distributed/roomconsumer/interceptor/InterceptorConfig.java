@@ -25,6 +25,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
         list.add("/user/login");
         list.add("/user/register");
         list.add("/user/logout");
+        list.add("/image/**");
         registration.addPathPatterns("/**").excludePathPatterns(list);
 
         //registration.excludePathPatterns("/**");
