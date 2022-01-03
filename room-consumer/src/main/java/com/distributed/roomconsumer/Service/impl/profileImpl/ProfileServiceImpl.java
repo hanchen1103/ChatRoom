@@ -13,7 +13,6 @@ public class ProfileServiceImpl implements ProfileRespoisty {
     @Reference
     ProfileService profileService;
 
-
     @Override
     public Integer addProfile(Profile profile) {
         if(profile == null || profile.getUserId() == null) {

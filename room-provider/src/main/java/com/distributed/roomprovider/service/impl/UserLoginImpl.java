@@ -2,6 +2,7 @@ package com.distributed.roomprovider.service.impl;
 
 import com.distributed.roomapi.model.User;
 import com.distributed.roomapi.service.UserLoginService;
+import com.distributed.roomapi.service.UserQueryService;
 import com.distributed.roomprovider.mapper.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -64,8 +64,10 @@ spring:
 #showSql
 logging:
   level:
-    org:
-      springframework: DEBUG
+    com:
+      distributed:
+        roomconsumer:
+          mapper : debug
 
 
 file:
