@@ -13,7 +13,7 @@ const ChatList = () => {
   const curSeleId = useSelector((state) => state.chatListId.value);
   const [initial, setInitial] = useState(true);
   const data = useSelector((state) => state.socket.value);
-
+  const [selecetdItem, setSelectedItem] = useState(-1);
   //Initial, get Data from localStorage.
   useEffect(() => {
     if (
@@ -112,20 +112,21 @@ const ChatList = () => {
 
   useEffect(() => {
     if (selectedId >= 0) {
-      dispatch(SetChatListId(selectedId));
+      dispatch(SetChatListId(selecetdItem));
       let tempList = finalList;
-      for(let i = 0; i<tempList.length; i++) {
+      for (let i = 0; i < tempList.length; i++) {
         tempList[i].selected = false;
       }
       tempList[selectedId].selected = true;
       setFinalList(tempList);
       setInitial((prev) => !prev);
     }
-  }, [selectedId, finalList]);
+  }, [finalList, selecetdItem]);
 
-  const updateSelectedList = (index) => {
+  const updateSelectedList = (itemId, index) => {
     setSelectedId(index);
-    console.log(index);
+    setSelectedItem(itemId);
+    console.log(index, itemId);
   };
 
   return (
@@ -161,7 +162,7 @@ const ChatList = () => {
                 padding: ".3rem 0rem ",
                 color: item.selected ? "#fff" : "rgba(255,255,255,.7)",
               }}
-              onClick={() => updateSelectedList(index)}
+              onClick={() => updateSelectedList(item.message.fromId, index)}
             >
               <img
                 style={{
@@ -186,7 +187,7 @@ const ChatList = () => {
                   <span className="chatListCardDetailDate">
                     {new Date(item.message.createDate).getFullYear() +
                       "/" +
-                      new Date(item.message.createDate).getMonth() +
+                      Number(new Date(item.message.createDate).getMonth() + 1) +
                       "/" +
                       new Date(item.message.createDate).getDate() +
                       " " +

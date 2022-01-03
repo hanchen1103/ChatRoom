@@ -70,15 +70,17 @@ const LoginDetail = () => {
           <h1>Login</h1>
           <input
             onChange={(value) => setUsername(value.target.value)}
+            values={username}
             placeholder="Username"
           />
           <input
+            value={pwd}
             onChange={(value) => setPwd(value.target.value)}
             placeholder="Password"
             type="password"
           />
           <span>Register</span>
-          <button>Login</button>
+          <button onClick={()=>goLogin()}>Login</button>
         </div>
       </div>
     </div>
