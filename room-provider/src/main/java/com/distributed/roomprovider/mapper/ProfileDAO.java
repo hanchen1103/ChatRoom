@@ -2,6 +2,7 @@ package com.distributed.roomprovider.mapper;
 
 import com.distributed.roomapi.model.Profile;
 import org.apache.ibatis.annotations.*;
+import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.stereotype.Repository;
 
 @Mapper
