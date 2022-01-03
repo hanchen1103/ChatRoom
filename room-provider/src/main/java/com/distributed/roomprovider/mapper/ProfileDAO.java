@@ -24,7 +24,7 @@ public interface ProfileDAO {
     Profile selectByUserId(@Param("userId") Integer userId);
 
     @Update({"update ", TABLE_NAME,
-            "set nickName = #{nickName}, bio = #{bio}, location=#{location}, job = #{job} where id = #{id}"})
+            "set nickName = #{nickName}, bio = #{bio}, location=#{location}, job = #{job} where userId = #{userId}"})
     void uodateProfile(Profile profile);
 
     @Update({"update ", TABLE_NAME, " set headUrl = #{headUrl} where userId = #{userId}"})

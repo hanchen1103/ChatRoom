@@ -29,7 +29,7 @@ public class MessageController {
             Integer isRead = Integer.parseInt(httpServletRequest.getParameter("isRead"));
             messageRespo.sendMessage(content, type, fromId, toId, isRead);
             return jsonUtil.getJSONString(200);
-        } catch (NullPointerException e) {
+        } catch (NullPointerException | NumberFormatException e) {
             logger.error(e.getMessage());
             return jsonUtil.getJSONString(500, e.getMessage());
         }

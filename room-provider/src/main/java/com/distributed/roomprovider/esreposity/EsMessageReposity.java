@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public interface EsMessageReposity extends ElasticsearchRepository<Message, String> {
+public interface EsMessageReposity extends ElasticsearchRepository<Message, Integer> {
 
     @Query("{\"match\": {\"content\": {\"query\": \"?0\"}}}")
     List<Message> findByContent(Integer userId, String content, PageRequest pageRequest);

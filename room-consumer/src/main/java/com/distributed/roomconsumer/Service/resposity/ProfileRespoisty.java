@@ -1,6 +1,9 @@
 package com.distributed.roomconsumer.Service.resposity;
 
+import com.distributed.roomapi.model.File;
 import com.distributed.roomapi.model.Profile;
+
+import java.io.IOException;
 
 public interface ProfileRespoisty {
 
@@ -10,6 +13,6 @@ public interface ProfileRespoisty {
 
     void updateProfile(Profile profile);
 
-    void updateHeadUrl(String headUrl, Integer userId);
+    void updateHeadUrl(File file, Integer userId) throws IOException;
 
 }

@@ -5,8 +5,10 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.distributed.roomapi.model.Message;
 import com.distributed.roomapi.service.MessageService;
 import com.distributed.roomconsumer.Service.resposity.MessageResposity;
+import com.distributed.roomconsumer.config.MQConfig.KafkaProducer;
 import com.distributed.roomconsumer.responsebody.ChatContactPersonResponseBody;
 import com.distributed.roomconsumer.responsebody.ChatProfileResponseBody;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 import java.util.List;
@@ -17,6 +19,9 @@ public class MessageResponseServiceImpl implements MessageResposity {
 
     @Reference
     MessageService messageResposity;
+
+    @Autowired
+    KafkaProducer kafkaProducer;
 
     @Override
     public ChatProfileResponseBody getFromIdAnd2IdProfile(Integer fromId, Integer toId,
@@ -49,6 +54,7 @@ public class MessageResponseServiceImpl implements MessageResposity {
         message.setContent(content);
         message.setStatus(1);
         message.setIsRead(isRead);
+        kafkaProducer.addEsMessageTopic(message);
         return messageResposity.addMessage(message);
     }
 

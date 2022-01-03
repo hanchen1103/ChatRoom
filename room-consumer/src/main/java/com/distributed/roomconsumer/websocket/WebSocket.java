@@ -123,6 +123,7 @@ public class WebSocket implements Serializable {
                 messageDto.setIsRead(1);
             }
             kafkaProducer.sendMessageTopic(messageDto);
+            kafkaProducer.addEsMessageTopic(messageDto);
         } catch (IOException e) {
             logger.error("Sendmessage error:" + e.getMessage());
         }

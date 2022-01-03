@@ -15,4 +15,5 @@ public class KafkaTopic implements Serializable {
 
     public static final String TOPIC_PROFILE = "TOPIC.PROFILE";
 
+    public static final String TOPIC_ES_MESSAGE = "TOPIC.ES.MESSAGE";
 }

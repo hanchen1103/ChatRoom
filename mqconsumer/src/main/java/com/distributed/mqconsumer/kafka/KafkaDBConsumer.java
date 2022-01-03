@@ -19,9 +19,9 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class KafkaConsumer {
+public class KafkaDBConsumer {
 
-    private static final Logger logger = LoggerFactory.getLogger(KafkaConsumer.class);
+    private static final Logger logger = LoggerFactory.getLogger(KafkaDBConsumer.class);
 
     @Reference
     MessageService messageService;
