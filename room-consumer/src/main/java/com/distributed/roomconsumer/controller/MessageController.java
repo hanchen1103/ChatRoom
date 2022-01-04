@@ -1,5 +1,6 @@
 package com.distributed.roomconsumer.controller;
 
+import com.distributed.roomconsumer.Service.resposity.EsQueryResposity;
 import com.distributed.roomconsumer.Service.resposity.MessageResposity;
 import com.distributed.roomconsumer.util.jsonUtil;
 import org.slf4j.Logger;
@@ -19,6 +20,7 @@ public class MessageController {
     @Resource
     MessageResposity messageRespo;
 
+
     @PostMapping(value = "/send", produces = "application/json;charset=UTF-8")
     public String sendMsg(HttpServletRequest httpServletRequest) {
         try {
@@ -36,15 +38,25 @@ public class MessageController {
     }
 
     @GetMapping(value = "", produces = "application/json;charset=UTF-8")
-    public String getProfile(@RequestBody Map<String, String> map) {
+    public String getProfile(Integer userId, Integer limit, Integer offset) {
         try {
             return jsonUtil.getJSONString(200,
-                    messageRespo.getFromIdAnd2IdProfile(Integer.parseInt(map.get("fromId")),
-                            Integer.parseInt(map.get("toId")), Integer.parseInt(map.get("limit")),
-                            Integer.parseInt(map.get("offset"))));
-        } catch (NullPointerException e) {
+                    messageRespo.selectContactByFromIdAnd2Id(userId, limit, offset));
+        } catch (NullPointerException | NumberFormatException e) {
             logger.error(e.getMessage());
             return jsonUtil.getJSONString(500, e.getMessage());
         }
     }
+
+//    @GetMapping(value = "/search", produces = "application/json;charset=UTF-8")
+//    public String searchMessage(HttpServletRequest httpServletRequest) {
+//        try {
+//            return jsonUtil.getJSONString(200,
+//                    esQueryResposity.queryMessage(Integer.parseInt(httpServletRequest.getParameter("fromId")),
+//                            Integer.parseInt(httpServletRequest.getParameter("toId")), httpServletRequest.getParameter("q")))   ;
+//        } catch (NullPointerException e) {
+//            logger.error(e.getMessage());
+//            return jsonUtil.getJSONString(500, e.getMessage());
+//        }
+//    }
 }

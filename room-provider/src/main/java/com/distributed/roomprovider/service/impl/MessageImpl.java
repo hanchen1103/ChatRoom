@@ -58,4 +58,15 @@ public class MessageImpl implements MessageService {
         }
         messageDAO.clearUnReadMessage(userId);
     }
+
+    @Override
+    public List<Message> selectContactByFromIdAnd2Id(Integer userId, Integer limit, Integer offset) {
+        if(userId == null || limit == null || offset == null) {
+            throw new NullPointerException("param exception");
+        }
+        if(limit < 0 || offset <= 0) {
+            throw new IllegalArgumentException("limit or offset error");
+        }
+        return messageDAO.selectContactByFromIdAnd2Id(userId, limit, offset);
+    }
 }

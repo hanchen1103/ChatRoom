@@ -24,8 +24,7 @@ public class Message implements Serializable {
      * message id
      */
     @Id
-    @Field(type = FieldType.Integer)
-    private Integer id;
+    private int id;
 
     /**
      * content, including file url or string
@@ -36,12 +35,13 @@ public class Message implements Serializable {
     /**
      * message type including vedio, pic, text, audio (various files)
      */
+    @Field(type = FieldType.Integer)
     private Integer type;
 
     /**
      * createtime
      */
-    @Field(type = FieldType.Integer)
+    @Field(type = FieldType.Date)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date createDate;

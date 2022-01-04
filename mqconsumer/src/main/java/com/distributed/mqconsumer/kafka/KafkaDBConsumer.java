@@ -35,12 +35,16 @@ public class KafkaDBConsumer {
                                @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
         Optional message = Optional.ofNullable(record.value());
         logger.info(message.toString());
-        if (message.isPresent()) {
-            String msg = String.valueOf(message.get());
-            Message sentMessage = JSON.parseObject(msg, Message.class);
-            messageService.addMessage(sentMessage);
-            logger.info(KafkaTopic.TOPIC_MESSAGE + " consumed： Topic:" + topic + ",Message:" + msg);
-            ack.acknowledge();
+        try {
+            if (message.isPresent()) {
+                String msg = String.valueOf(message.get());
+                Message sentMessage = JSON.parseObject(msg, Message.class);
+                messageService.addMessage(sentMessage);
+                logger.info(KafkaTopic.TOPIC_MESSAGE + " consumed： Topic:" + topic + ",Message:" + msg);
+                ack.acknowledge();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

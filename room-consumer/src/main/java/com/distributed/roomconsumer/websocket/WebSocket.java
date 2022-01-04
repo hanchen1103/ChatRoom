@@ -7,8 +7,10 @@ import com.distributed.roomapi.model.Profile;
 import com.distributed.roomapi.model.User;
 import com.distributed.roomapi.service.ProfileService;
 import com.distributed.roomconsumer.Service.impl.WebSocketImpl.ConWebSocketService;
+import com.distributed.roomconsumer.Service.impl.userImpl.UserQueryServiceImpl;
 import com.distributed.roomconsumer.Service.resposity.MessageResposity;
 import com.distributed.roomconsumer.Service.resposity.ProfileRespoisty;
+import com.distributed.roomconsumer.Service.resposity.UserLoginResposity;
 import com.distributed.roomconsumer.Service.resposity.UserQueryResposity;
 import com.distributed.roomconsumer.config.MQConfig.KafkaProducer;
 import com.distributed.roomconsumer.config.websocketConfig.CustomSpringConfigurator;
@@ -40,7 +42,7 @@ public class WebSocket implements Serializable {
     MessageResposity messageResposity;
 
     @Autowired
-    UserQueryResposity userQueryResposity;
+    UserQueryServiceImpl userQueryService;
 
     @Autowired
     ProfileRespoisty profileRespoisty;
@@ -80,6 +82,9 @@ public class WebSocket implements Serializable {
                     map.put("message", message);
                     Integer fromId = message.getFromId();
                     Profile profile = profileRespoisty.selectByUserId(fromId);
+                    if(profile == null) {
+                        continue;
+                    }
                     map.put("headUrl", profile.getHeadUrl());
                     map.put("nickName", profile.getNickName());
                     unReadList.add(map);
@@ -109,9 +114,10 @@ public class WebSocket implements Serializable {
         messageDto.setFromId(this.userId);
         messageDto.setIsRead(0);
         messageDto.setStatus(0);
+        messageDto.setType(1);
         messageDto.setCreateDate(new Date());
-        User toUser = userQueryResposity.selectUserById(toId);
-        User fromUser = userQueryResposity.selectUserById(userId);
+        User toUser = userQueryService.selectUserById(toId);
+        User fromUser = userQueryService.selectUserById(userId);
         if(toUser == null || toUser.getStatus() > 0 || fromUser == null || fromUser.getStatus() > 0) {
             logger.error("User exception");
             return ;

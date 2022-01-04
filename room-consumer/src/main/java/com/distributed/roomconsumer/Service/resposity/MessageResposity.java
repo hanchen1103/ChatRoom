@@ -30,7 +30,7 @@ public interface MessageResposity {
     Integer sendMessage(String content, Integer type, Integer fromId, Integer toId, Integer isRead);
 
 
-    List<ChatContactPersonResponseBody> selectContactByFromIdAnd2Id(Integer userId);
+    List<ChatContactPersonResponseBody> selectContactByFromIdAnd2Id(Integer userId, Integer limit, Integer offset);
 
     List<Message> selectUnReadMessage(Integer userId);
 

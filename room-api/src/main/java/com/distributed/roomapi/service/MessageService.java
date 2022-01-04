@@ -19,4 +19,6 @@ public interface MessageService {
     Message selectById(Integer messageId);
 
     void clearUnReadMessage(Integer userId);
+
+    List<Message> selectContactByFromIdAnd2Id(Integer userId, Integer limit, Integer offset);
 }
