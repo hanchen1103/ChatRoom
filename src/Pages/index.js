@@ -4,5 +4,6 @@ import Chat from "./Chat.jsx";
 import LoginDetail from "./LoginDetail.jsx";
 import Chatroom from "./Chatroom.jsx";
 import ChatroomDetail from "./ChatroomDetail.jsx";
+import Profile from "./profile.jsx";
 
-export { Home, Error, Chat, LoginDetail, Chatroom, ChatroomDetail };
+export { Home, Error, Chat, LoginDetail, Chatroom, ChatroomDetail, Profile };

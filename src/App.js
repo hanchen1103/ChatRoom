@@ -6,6 +6,7 @@ import {
   LoginDetail,
   Chatroom,
   ChatroomDetail,
+  Profile,
 } from "./Pages/index";
 import Login from "./Routes/login.jsx";
 import Loged from "./Routes/Loged.jsx";
@@ -32,6 +33,7 @@ function App() {
                 <Route path=":id" element={<ChatroomDetail />} />
               </Route>
             </Route>
+            <Route path="user/:id" element={<Profile />} />
             <Route path="chat" element={<Chat />} />
             <Route path="*" element={<Error />} />
           </Route>
